@@ -1,0 +1,38 @@
+<%- include("./partial/header.ejs") -%> 
+
+<%- include("./partial/nav.ejs") -%> 
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="contenido">
+                <h1>Vista de Productos</h1>
+                
+                <% if(existenProductos) {%>
+                <table class="table table-dark table-borderless align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for( producto of arrayProductos ) { %>
+                            <tr>
+                                <td><%= producto.title %></td>
+                                <td><%= producto.price %></td>
+                                <td><img src="<%= producto.thumbnail%>" class="thumbnail"></td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                <% }else{ %>
+                    <p class="alert alert-warning no-data">No hay productos</p>
+                <% } %> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("./partial/footer.ejs") %> 

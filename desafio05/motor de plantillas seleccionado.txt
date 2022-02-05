@@ -1,0 +1,5 @@
+Para mi proyecto prefiero el motor de plantillas ejs.
+
+Dado que poseo experiencia previa con PHP y resulta muy similar a dicho lenguaje embebido dentro de html.
+
+Y algo que destaco, es que ejs permite expresiones en los condicionales. Handlebars y pug solo aceptan valores.

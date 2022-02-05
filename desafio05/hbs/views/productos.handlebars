@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="contenido">
+                <h1>Vista de Productos</h1>
+                
+                {{#if existenProductos}}
+                <table class="table table-dark table-borderless align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each arrayProductos}}
+                        <tr>
+                            <td>{{this.title}}</td>
+                            <td>{{this.price}}</td>
+                            <td><img src="{{this.thumbnail}}" class="thumbnail"></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{else}}
+                <p class="alert alert-warning no-data">No hay productos</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

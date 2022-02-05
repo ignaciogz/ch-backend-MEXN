@@ -1,0 +1,20 @@
+extends template
+
+block contenidos
+    div(class="container-fluid")
+        div(class="row")
+            div(class="col-12")
+                div(class="contenido")
+                    h1 Ingrese Producto
+
+                    form(action="/productos" method="POST")
+                        label(for="title" class="form-label">Nombre)
+                        input(type="text" id="title" name="title" class="form-control" placeholder="Titulo")
+
+                        label(for="price" class="form-label">Precio)
+                        input(type="number" id="price" name="price" class="form-control" placeholder="Precio" min="0.01" step="0.01")
+
+                        label(for="thumbnail" class="form-label">Foto URL)
+                        input(type="text" id="thumbnail" name="thumbnail" class="form-control" placeholder="Miniatura")
+
+                        button(type="submit" class="btn btn-success") Enviar
