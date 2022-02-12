@@ -1,0 +1,17 @@
+{
+  "listado": [
+    {
+      "email": "email@email.com",
+      "date": "12-02-2022 17:12:02",
+      "msj": "Hola !",
+      "id": 1
+    },
+    {
+      "email": "algo@gmail.com",
+      "date": "12-02-2022 17:13:53",
+      "msj": "HELLOOOOOO",
+      "id": 2
+    }
+  ],
+  "ultimoID": 2
+}
