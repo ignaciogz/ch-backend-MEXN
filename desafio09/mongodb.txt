@@ -1,0 +1,227 @@
+------------------------------------
+PUNTO 1 y 2
+------------------------------------
+use ecommerce
+
+db.mensajes.insertMany([
+    {
+      "email": "email@email.com",
+      "date": "03-03-2022 17:12:02",
+      "msj": "Hola !"
+    },
+    {
+      "email": "algo@gmail.com",
+      "date": "03-03-2022 17:13:53",
+      "msj": "HELLOOOOOO"
+    },
+    {
+      "email": "email@email.com",
+      "date": "03-03-2022 17:14:05",
+      "msj": "Estas probando mongodb?"
+    },
+    {
+      "email": "algo@gmail.com",
+      "date": "03-03-2022 17:16:23",
+      "msj": "Sisi, estoy resolviendo el desafio 09"
+    },
+    {
+      "email": "algo@gmail.com",
+      "date": "03-03-2022 17:16:57",
+      "msj": "Tambien estoy jugando un poco con la herramienta mongo compass"
+    },
+    {
+      "email": "email@email.com",
+      "date": "03-03-2022 17:18:33",
+      "msj": "Excelente"
+    },
+    {
+      "email": "email@email.com",
+      "date": "03-03-2022 17:20:05",
+      "msj": "Estas entendiendo el tema?"
+    },
+    {
+      "email": "algo@gmail.com",
+      "date": "03-03-2022 17:21:19",
+      "msj": "Por el momento si, me resulta mas sencillo que las bases de datos SQL"
+    },
+    {
+      "email": "algo@gmail.com",
+      "date": "03-03-2022 17:21:33",
+      "msj": "Lo aburrido es tener que invertar estos msjs"
+    },
+    {
+      "email": "email@email.com",
+      "date": "03-03-2022 17:22:01",
+      "msj": "Jajaja"
+    }
+])
+
+db.productos.insertMany([
+    {
+      "title": "Escuadra",
+      "price": 120,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+    },
+    {
+      "title": "Calculadora",
+      "price": 580,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png"
+    },
+    {
+      "title": "Globo Terráqueo",
+      "price": 900,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+    },
+    {
+      "title": "Producto 4",
+      "price": 1340,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+    },
+    {
+      "title": "Producto 5",
+      "price": 1700,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+    },
+    {
+      "title": "Producto 6",
+      "price": 1280,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+    },
+    {
+      "title": "Producto 7",
+      "price": 2860,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+    },
+    {
+      "title": "Producto 8",
+      "price": 3350,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+    },
+    {
+      "title": "Producto 9",
+      "price": 4320,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+    },
+    {
+      "title": "Producto 10",
+      "price": 4990,
+      "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+    }
+])
+
+------------------------------------
+PUNTO 3
+------------------------------------
+db.mensajes.find().pretty()
+db.productos.find().pretty()
+
+------------------------------------
+PUNTO 4
+------------------------------------
+db.mensajes.count()
+db.productos.count()
+
+------------------------------------
+PUNTO 5A
+------------------------------------
+db.productos.insertOne({
+    "title": "Producto Nuevo",
+    "price": 100,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+})
+
+------------------------------------
+PUNTO 5B
+------------------------------------
+-E1-
+db.productos.find({
+    "price": { $lt: 1000 }
+})
+
+-E2-
+db.productos.find({
+    $and: [
+        { "price": {$gte: 1000} },
+        { "price": {$lte: 3000} }
+    ]
+})
+
+-E3-
+db.productos.find({
+    "price": { $gt: 3000 }
+})
+
+-E4-
+db.productos.find(
+    {},
+    { "title": 1 }
+).skip(2).sort({price: 1}).limit(1)
+
+------------------------------------
+PUNTO 5C
+------------------------------------
+db.productos.updateMany(
+    {},
+    {
+        $set: { "stock": 100 }
+    }
+)
+
+------------------------------------
+PUNTO 5D
+------------------------------------
+db.productos.updateMany(
+    {
+        "price": { $gt: 4000 }
+    },
+    {
+        $set: { "stock": 0 }
+    }
+)
+
+------------------------------------
+PUNTO 5E
+------------------------------------
+db.productos.deleteMany({
+    "price": { $lt: 1000 }
+})
+
+------------------------------------
+PUNTO 6
+------------------------------------
+PASO 1
+mongod --dbpath "C:\mongoData"
+
+mongo
+use admin
+db.createUser(
+  {
+    user: "root",
+    pwd: "123",
+    roles: [
+      { role: "userAdminAnyDatabase", db: "admin" },
+      { role: "readWriteAnyDatabase", db: "admin" }
+    ]
+  }
+)
+
+PASO 2
+mongod --auth --dbpath "C:\mongoData"
+
+mongo -u "root" -p "123" --authenticationDatabase "admin"
+use admin
+db.createUser({
+    user: "pepe",
+    pwd: "asd456",
+    roles: [
+       { role: "read", db: "ecommerce" }
+    ]
+})
+
+mongo -u "pepe" -p "asd456"
+
+db.productos.insertOne({
+    "title": "Producto que NO se agrega por falta de privilegio de escritura",
+    "price": 5000,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+})
