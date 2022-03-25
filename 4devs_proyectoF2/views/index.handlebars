@@ -1,0 +1,129 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">4 D E V S</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact Us</a>
+                            </li>
+                    </ul>
+                    {{#if administrator}}
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Admin Menu:</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-info text-uppercase fw-bold" href="/#addproduct">Add product</a>   
+                        </li>
+                    </ul>
+                    {{/if}}
+                    <div class="d-flex navbar-text">
+                        <a class="nav-link" href="/#"><i class="fa-solid fa-user"></i></a>
+                        <a class="nav-link" href="/#cart"><i class="fa-solid fa-cart-shopping"></i> <span id="itemsNumber">{{cart.items.length}}</span></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="col-12">
+            <div class="contenido">
+                <h3 class="text-center">Our Shop</h3>
+
+                <div class="row">
+                    <div class="col-2 bg-info">
+                        <span>Product filters column</span>
+                    </div>
+                    <div class="col-10">
+                        <div class="row productContainer">
+                            {{#each products}}
+                            <div class="col-3">
+                                <div class="card">
+                                    <img src="{{this.foto}}" class="card-img-top" style="height: 200px" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">{{this.nombre}}</h5>
+                                        <p class="card-text text-center fs-4"><b>{{this.precio}}</b></p>
+                                        <p class="card-text text-center">
+                                            <i>Stock: {{this.stock}}</i> ; <i>Codigo: {{this.codigo}}</i>
+                                        </p>
+                                        <p class="card-text text-center">{{this.descripcion}}</p>
+                                        <div class="col-6 mx-auto">
+                                            <a href="javaScript:void(0)" class="btn btn-primary mb-2 addBtn" data-id_prod={{this.id}}>Add to cart</a>
+                                        </div>
+                                        {{#if ../administrator}}
+                                        <div class="card-footer">
+                                            <div class="btn-group mt-2 w-100" role="group" aria-label="administrator options">
+                                                <a href="javaScript:void(0)" class="btn btn-warning editBtn" data-bs-toggle="modal" data-bs-target="#modalEdit" data-id_prod={{this.id}}>
+                                                    <i class="fa-solid fa-pencil"></i> Edit
+                                                </a>
+                                                <a href="javaScript:void(0)" class="btn btn-danger ms-2 deleteBtn" data-id_prod={{this.id}}>
+                                                    <i class="fa-solid fa-trash"></i> Delete
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#if administrator}}
+<!-- Modal -->
+<div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditLabel">hola</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-8 offset-2">
+                        <form id="formEditProduct">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Titulo" required>
+                            
+                            <label for="precio" class="form-label mt-3">Precio</label>
+                            <input type="number" id="precio" name="precio" class="form-control" placeholder="Precio" min="0.01" step="0.01" required>
+                            
+                            <label for="foto" class="form-label mt-3">Foto URL</label>
+                            <input type="text" id="foto" name="foto" class="form-control" placeholder="Foto URL" required>
+                            
+                            <label for="codigo" class="form-label mt-3">Codigo</label>
+                            <input type="text" id="codigo" name="codigo" class="form-control" placeholder="Codigo" required>
+                            
+                            <label for="stock" class="form-label mt-3">Stock</label>
+                            <input type="number" id="stock" name="stock" class="form-control" placeholder="Stock" min="0" step="1" required>
+                            
+                            <label for="descripcion" class="form-label mt-3">Descripcion</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control" rows="4" placeholder="Ingrese la descripcion" required></textarea>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="formEditProduct" class="btn btn-warning">Modify</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
