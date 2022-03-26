@@ -10,7 +10,6 @@ class FirebaseContainer {
 
     async #init() {
         this.lastID = await this.getAll().then(content => {
-            console.log(content);
             const elementsQty = content.length;
 
             if (elementsQty > 0) {
