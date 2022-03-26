@@ -19,12 +19,8 @@ class Cart {
         const { id } = req.params;
         const { id_prod } = req.body;
         
-        // NECESITO USAR EL SERVICIO DE PRODUCTOS, desde el servicio cart.
-        // Pero NO vimos comunicacion entre servicios propios
-        
-        //const product = null;
+        // USO EL SERVICIO DE PRODUCTOS, desde el controlador cart:
         const product = await productsServices.getID(id_prod);
-
         await cartServices.add(id, product);
         res.json({});
     };
