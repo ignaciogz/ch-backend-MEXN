@@ -1,0 +1,31 @@
+{
+  "name": "desafio11",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "faker": "^5.5.3",
+    "firebase-admin": "^10.0.2",
+    "handlebars": "^4.7.7",
+    "knex": "^0.95.15",
+    "moment": "^2.29.1",
+    "mongoose": "^6.2.7",
+    "mysql": "^2.18.1",
+    "normalizr": "^3.6.2",
+    "socket.io": "^4.4.1",
+    "sqlite3": "^5.0.2"
+  }
+}
