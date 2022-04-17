@@ -14,9 +14,9 @@ args = ObjectTools.removeAllPropertiesExcept(args, ["PORT"]);
 
 const config = {
     dev: process.env.NODE_ENV !== 'production',
-    //PORT: process.env.PORT,
-    SELECTED_GENERAL_STORAGE: process.env.GENERAL_STORAGE || "Memory",
-    SELECTED_CHAT_STORAGE: process.env.CHAT_STORAGE || "Memory",
+    //PORT: process.env.PORT || 8080,
+    GENERAL_STORAGE: process.env.GENERAL_STORAGE || "Memory",
+    CHAT_STORAGE: process.env.CHAT_STORAGE || "Memory",
     SESSION_SECRET: process.env.SESSION_SECRET || "NO SUPER SECRET",
     FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID || "",
     FACEBOOK_SECRET_KEY: process.env.FACEBOOK_SECRET_KEY || ""
