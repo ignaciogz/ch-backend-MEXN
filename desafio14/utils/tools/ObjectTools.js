@@ -7,7 +7,7 @@ class ObjectTools {
                 newObj[prop] = obj[prop];
             }
         }
-
+        
         return newObj;
     }
 }

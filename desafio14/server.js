@@ -40,8 +40,11 @@ app.use(session({
 // ↓ ****** INICIO - PASSPORT-FACEBOOK ****** ↓
 app.use(passportFacebook.initialize());
 app.use(passportFacebook.session());
+// ↑ ****** FIN - PASSPORT-FACEBOOK ****** ↑
+
 
 serverRoutes(app);
+
 
 // ↓ ****** INICIO - SOCKETS ****** ↓
 io.on('connection', async socket => {
