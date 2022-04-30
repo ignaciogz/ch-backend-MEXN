@@ -1,0 +1,5 @@
+nginx/
+node_modules/
+package-lock.json
+.env
+node/utils/firebase/config/

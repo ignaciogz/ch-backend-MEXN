@@ -1,0 +1,43 @@
+IMPORTANTE !!
+-> En windows, para correr comandos de pm2 usar "Git Bash".
+
+::::::::::::::::::::::::::::::::::::::::
+Consigna 1
+::::::::::::::::::::::::::::::::::::::::
+node server_cluster.js -p 8080 -m FORK
+node server_cluster.js -p 8081 -m CLUSTER
+
+forever start server_cluster.js -p 8080 -m FORK
+forever start server_cluster.js -p 8081 -m CLUSTER
+forever list
+
+pm2 start server_cluster.js --name="El fork" -- -p 8080 -m FORK
+pm2 start server_cluster.js --name="Un cluster" -- -p 8081 -m CLUSTER
+pm2 list
+
+pm2 start server.js --watch -i max -- -p 8083
+Usando powershell ejecuto para matar alguno: taskkill /pid <PID> /f
+pm2 list
+
+
+::::::::::::::::::::::::::::::::::::::::
+Consigna 2 - Parte 1
+::::::::::::::::::::::::::::::::::::::::
+Paso 1) En nginx.conf con la linea 44 descomentada, ejecutar nginx
+Paso 2) pm2 start server.js -- -p 8080
+Paso 3) pm2 start server_cluster.js -- -p 8081 -m CLUSTER
+Paso 4) Visitar la ruta: /fork/api/randoms
+
+
+::::::::::::::::::::::::::::::::::::::::
+Consigna 2 - Parte 2
+::::::::::::::::::::::::::::::::::::::::
+Paso 1) Cerrar todos las instancias de servidores
+Paso 2) En nginx.conf con la linea 44 comentada y la linea 47 descomentada, hacer un reload de nginx: ./nginx.exe -s reload
+Paso 3) pm2 start server.js -- -p 8080
+Paso 4) Ejecutar las siguientes instrucciones:
+	pm2 start server.js --name="nginxcluster-1" -- -p 8082
+	pm2 start server.js --name="nginxcluster-2" -- -p 8083
+	pm2 start server.js --name="nginxcluster-3" -- -p 8084
+	pm2 start server.js --name="nginxcluster-4" -- -p 8085
+Paso 5) Visitar la ruta: /fork/api/randoms
