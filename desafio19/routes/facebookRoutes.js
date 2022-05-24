@@ -1,16 +1,15 @@
 const express = require('express');
 const { passportFacebook } = require("../utils/passport/facebook");
 
-module.exports = app => {
-    const router = express.Router();
-    app.use('/auth/facebook', router);
+const facebookRouter = express.Router();
 
-    router.get('/', passportFacebook.authenticate('facebook'));
+facebookRouter.get('/', passportFacebook.authenticate('facebook'));
 
-    router.get('/callback', 
-        passportFacebook.authenticate('facebook', {
-            successRedirect: '/',
-            failureRedirect: '/login-error'
-        })
-    );
-}
+facebookRouter.get('/callback', 
+    passportFacebook.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect: '/login-error'
+    })
+);
+
+module.exports = facebookRouter;

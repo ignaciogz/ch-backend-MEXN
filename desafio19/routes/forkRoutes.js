@@ -1,21 +1,8 @@
 const express = require('express');
-const { fork } = require('child_process');
+const controller = require('../controllers/fork');
 
-module.exports = app => {
-    const router = express.Router();
-    app.use('/fork', router);
+const forkRouter = express.Router();
 
-    router.get('/api/randoms', (req, res) => {
-        const forked = fork("forks/randomCounter.js")
-        let { cant } = req.query;
+forkRouter.get('/api/randoms', controller.getRandoms);
 
-        cant = Number(cant) || 100000000;
-
-        forked.send({ cant });
-
-        forked.on('message', msg => {
-            const { resultado } = msg;
-            res.json(resultado);
-        })
-    });
-}
+module.exports = forkRouter;

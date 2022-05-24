@@ -1,4 +1,4 @@
-const { ArrayTools, TimeTools } = require('../tools');
+const { ArrayTools, TimeTools } = require('../../utils/tools');
 
 class MemoryContainer {
     constructor() {

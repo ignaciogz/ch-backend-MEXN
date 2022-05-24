@@ -1,5 +1,5 @@
 const knex = require("knex");
-const { ArrayTools, TimeTools } = require('../tools');
+const { ArrayTools, TimeTools } = require('../../utils/tools');
 
 class RelationalDBContainer {
     constructor(table, config, schema) {

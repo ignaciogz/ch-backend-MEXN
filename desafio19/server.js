@@ -1,5 +1,4 @@
 const { args, config, DB } = require("./config");
-const { errorLog: loggerWinston } = require("./utils/loggers/winston");
 
 const express = require("express");
 const { Server: HttpServer } = require('http');
@@ -8,7 +7,6 @@ const { Server: IOServer } = require('socket.io');
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
-const serverRoutes = require('./routes');
 const serverMw = require('./utils/middlewares/serverMiddleware');
 
 app.use(express.json());
@@ -52,66 +50,27 @@ app.use(passportFacebook.initialize());
 app.use(passportFacebook.session());
 // ↑ ****** FIN - PASSPORT-FACEBOOK ****** ↑
 
-serverRoutes(app);
+// ↓ ****** INICIO - ARQUITECTURA EN CAPAS ****** ↓
+const facebookRouter = require('./routes/facebookRoutes');
+const fakerRouter = require('./routes/fakerRoutes');
+const forkRouter = require('./routes/forkRoutes');
+const generalRouter = require('./routes/generalRoutes');
+const processRouter = require('./routes/processRoutes');
+const userRouter = require('./routes/userRoutes');
+
+app.use('/', generalRouter);
+app.use('/api/usuario', userRouter);
+app.use('/auth/facebook', facebookRouter);
+app.use('/faker', fakerRouter);
+app.use('/fork', forkRouter);
+app.use('/process', processRouter);
+// ↑ ****** FIN - ARQUITECTURA EN CAPAS ****** ↑
 
 app.use(serverMw.routeNotImplemented);
 
 // ↓ ****** INICIO - SOCKETS ****** ↓
-const { chatSchema } = require("./models/schemas/normalize/chat");
-const { productsDao, chatDao } = require('./models/daos');
-const { NormalizeTools } = require("./utils/tools");
-
-io.on('connection', async socket => {
-    let arrayProductos = await productsDao.getAll();
-    let arrayMsjs = await chatDao.getAll();
-
-    let existenProductos = arrayProductos.length > 0;
-    let existenMsjs = arrayMsjs.length > 0;
-    
-    console.log('Usuario conectado: ', socket.id);
-
-        arrayMsjs = NormalizeTools.getNormalizeData(arrayMsjs, chatSchema, "mensajes");
-
-    socket.emit('init', { arrayProductos, existenProductos, arrayMsjs, existenMsjs });
-
-    // ↓ ****** INICIO - SOCKET: Producto ****** ↓
-    socket.on("new-product", async productoNuevo => {
-        try {
-            await productsDao.save(productoNuevo);
-            arrayProductos = await productsDao.getAll();
-    
-            if (!existenProductos) {
-                existenProductos = true;
-                io.sockets.emit('renderView', { arrayProductos, existenProductos, arrayMsjs, existenMsjs });
-            } else {
-                io.sockets.emit('renderNewProduct', { arrayProductos });
-            }
-        } catch (error) {
-            loggerWinston.error(`API Productos -> Error: ${error.message}`)
-        }
-    });
-    // ↑ ****** FIN - SOCKET: Producto ****** ↑
-
-    // ↓ ****** INICIO - SOCKET: Mensaje ****** ↓
-    socket.on("new-message", async mensajeNuevo => {
-        try {
-            await chatDao.save(mensajeNuevo);
-            arrayMsjs = await chatDao.getAll();
-    
-            arrayMsjs = NormalizeTools.getNormalizeData(arrayMsjs, chatSchema, "mensajes");
-    
-            if(!existenMsjs) {
-                existenMsjs = true;
-                io.sockets.emit('renderView', { arrayProductos, existenProductos, arrayMsjs, existenMsjs });
-            } else {
-                io.sockets.emit('renderNewMessage', { arrayMsjs });
-            }   
-        } catch (error) {
-            loggerWinston.error(`API Mensajes -> Error: ${error.message}`)
-        }
-    });
-    // ↑ ****** FIN - SOCKET: Mensaje ****** ↑
-});
+const appSockets = require('./services/socket');
+appSockets(io);
 // ↑ ****** FIN - SOCKETS ****** ↑
 
 // ↓ ****** INICIO - Clusters y Escalabilidad ****** ↓

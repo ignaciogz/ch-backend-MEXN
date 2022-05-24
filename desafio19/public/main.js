@@ -32,6 +32,11 @@ function initSockets() {
 
     socket.on('init', data => {
         data = denormalizeMsjs(data, chatSchema);
+        data.existenProductos = data.arrayProductos.length > 0;
+        data.existenMsjs = data.arrayMsjs.mensajes.length > 0;
+
+        console.log("INIT: ", data);
+
         renderView(data);
 
         initFormProduct();
@@ -40,6 +45,9 @@ function initSockets() {
 
     socket.on('renderView', data => {
         data = denormalizeMsjs(data, chatSchema);
+        data.existenProductos = data.arrayProductos.length > 0;
+        data.existenMsjs = data.arrayMsjs.mensajes.length > 0;
+        
         renderView(data);
     });
 
@@ -154,17 +162,33 @@ function initFormChat() {
 }
 
 function denormalizeMsjs(data, schema) {
-    let arrayMsjs = normalizr.denormalize(data.arrayMsjs.result, schema, data.arrayMsjs.entities);
+    let compresion = null;
 
-    let normalizado = JSON.stringify(data.arrayMsjs).length;
-    let desnormalizado = JSON.stringify(arrayMsjs).length;
-    let compresion = Math.floor(100 - (normalizado * 100) / desnormalizado);
+    if(data.arrayMsjs.length > 0) {
+        let arrayMsjs = normalizr.denormalize(data.arrayMsjs.result, schema, data.arrayMsjs.entities);
+        console.log("DATA: ", data);
+        console.log("ARRAY desnormalizado: ", arrayMsjs)
     
-    return {
-        ...data,
-        arrayMsjs,
-        compresion
-    };
+        let normalizado = JSON.stringify(data.arrayMsjs).length;
+        let desnormalizado = JSON.stringify(arrayMsjs).length;
+        compresion = Math.floor(100 - (normalizado * 100) / desnormalizado);
+
+        return {
+            ...data,
+            arrayMsjs,
+            compresion
+        }
+    } else {
+        compresion = 0;
+
+        return {
+            ...data,
+            arrayMsjs: {
+                mensajes: data.arrayMsjs
+            },
+            compresion
+        }
+    }
 }
 
 // Tomado de 2da Entrega de Proyecto Final:
