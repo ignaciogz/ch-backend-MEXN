@@ -1,0 +1,98 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="contenido user-navbar bg-success">
+                <h1>Bienvenido <span id="contenedorNombreDeUsuario"></span></h1>
+                <button id="btn-desloguear" type="button" class="btn btn-warning">Desloguear</button>
+            </div>
+            <div id="contenedorFacebookLogin" class="contenido user-info bg-success">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="contenido">
+                <h2>Ingrese Producto</h2>
+
+                <form id="formProduct">
+                    <label for="title" class="form-label">Nombre</label>
+                    <input type="text" id="title" name="title" class="form-control" placeholder="Titulo" required>
+
+                    <label for="price" class="form-label">Precio</label>
+                    <input type="number" id="price" name="price" class="form-control" placeholder="Precio" min="0.01" step="0.01" required>
+
+                    <label for="thumbnail" class="form-label">Foto URL</label>
+                    <input type="text" id="thumbnail" name="thumbnail" class="form-control" placeholder="Miniatura" required>
+
+                    <input type="submit" class="btn btn-success" value="Enviar">
+                </form>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="contenido">
+                <h3>Lista de Productos</h3>
+
+                {{#if existenProductos}}
+                <table class="table table-dark table-borderless align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contenedorProductos">
+                        {{#each arrayProductos}}
+                        <tr>
+                            <td>{{this.title}}</td>
+                            <td>{{this.price}}</td>
+                            <td><img src="{{this.thumbnail}}" class="thumbnail"></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{else}}
+                <p class="alert alert-warning no-data">No hay productos</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="contenido">
+                <h2>Centro de Mensajes (compresión <span id="compresion">{{compresion}}</span>%)</h2>
+                
+                <form id="formChat">
+                    <input type="text" id="email" placeholder="suemail@gmail.com" required>
+                    <input type="text" id="nombre" placeholder="su nombre" required>
+                    <input type="text" id="apellido" placeholder="su apellido" required>
+                    <input type="number" id="edad" placeholder="su edad" required>
+                    <input type="text" id="alias" placeholder="su alias" required>
+                    <input type="text" id="avatar" placeholder="su url avatar" required>
+                    <hr>
+
+                    <div id="contenedorChat">
+                        {{#if existenMsjs}}
+                            {{#each arrayMsjs.mensajes.entities.mensajes}}
+                                <div class="msjChat">
+                                    <b>{{this.autor.id}}</b>
+                                    <span>[{{this.timestamp}}]</span>: <i>{{this.msj}}</i>
+                                    <img class="avatar" src={{this.autor.avatar}} alt="Avatar de {{this.autor.nombre}} {{this.autor.apellido}}">
+                                </div>
+                            {{/each}}
+                        {{else}}
+                        <p class="alert alert-warning no-data">No hay mensajes</p>
+                        {{/if}}
+                    </div>
+
+                    <input type="text" id="msj" placeholder="Ingrese un msj...">
+                    <input type="submit" class="btn btn-primary" value="Enviar!">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
