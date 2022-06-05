@@ -1,7 +1,9 @@
-const { productsDao, chatDao } = require('../models/daos');
-const { chatSchema } = require("../models/schemas/normalize/chat");
-const { NormalizeTools } = require("../utils/tools");
-const { errorLog: loggerWinston } = require("../utils/loggers/winston");
+const { productsDao } = require('../../models/daos');
+const { chatSchema } = require("../../models/schemas/normalize/chat");
+const { NormalizeTools } = require("../tools");
+const { errorLog: loggerWinston } = require("../loggers/winston");
+
+const chatRepo = require('../../repositories/ChatRepo');
 
 const productSocket = io => {
     return async productoNuevo => {
@@ -10,10 +12,10 @@ const productSocket = io => {
             let existenProductos = arrayProductos.length > 0;
             
             await productsDao.save(productoNuevo);
-            arrayProductos.push(productoNuevo);
+            arrayProductos = await productsDao.getAll();
             
             if(!existenProductos) {
-                let arrayMsjs = await chatDao.getAll();
+                let arrayMsjs = await chatRepo.getAll();
                 arrayMsjs = NormalizeTools.getNormalizeData(arrayMsjs, chatSchema, "mensajes");
 
                 io.sockets.emit('renderView', { arrayProductos, arrayMsjs });
@@ -29,11 +31,11 @@ const productSocket = io => {
 const messageSocket = io => {
     return async mensajeNuevo => {
         try {
-            let arrayMsjs = await chatDao.getAll();
+            let arrayMsjs = await chatRepo.getAll();
             let existenMsjs = arrayMsjs.length > 0;
-
-            await chatDao.save(mensajeNuevo);
-            arrayMsjs.push(mensajeNuevo);
+            
+            await chatRepo.save(mensajeNuevo);
+            arrayMsjs = await chatRepo.getAll();
 
             arrayMsjs = NormalizeTools.getNormalizeData(arrayMsjs, chatSchema, "mensajes");
 
@@ -54,7 +56,7 @@ const initSocket = io => {
         console.log('Usuario conectado: ', socket.id);
         
         let arrayProductos = await productsDao.getAll();
-        let arrayMsjs = await chatDao.getAll();
+        let arrayMsjs = await chatRepo.getAll();
         
         arrayMsjs = NormalizeTools.getNormalizeData(arrayMsjs, chatSchema, "mensajes");
 

@@ -77,7 +77,7 @@
 
                     <div id="contenedorChat">
                         {{#if existenMsjs}}
-                            {{#each arrayMsjs.mensajes.entities.mensajes}}
+                            {{#each arrayMsjs.mensajes}}
                                 <div class="msjChat">
                                     <b>{{this.autor.id}}</b>
                                     <span>[{{this.timestamp}}]</span>: <i>{{this.msj}}</i>

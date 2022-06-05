@@ -69,8 +69,8 @@ app.use('/process', processRouter);
 app.use(serverMw.routeNotImplemented);
 
 // ↓ ****** INICIO - SOCKETS ****** ↓
-const appSockets = require('./services/socket');
-appSockets(io);
+const appSocket = require('./utils/sockets/appSocket');
+appSocket(io);
 // ↑ ****** FIN - SOCKETS ****** ↑
 
 // ↓ ****** INICIO - Clusters y Escalabilidad ****** ↓

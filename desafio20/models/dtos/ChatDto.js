@@ -1,9 +1,9 @@
 class ChatDto {
-    constructor(result) {
-        this.autor = JSON.parse(result.autor);
-        this.id = result.id || null;
-        this.msj = result.msj;
-        this.timestamp = result.timestamp || null;
+    constructor(data) {
+        this.autor = data.autor;
+        this.id = data.id || null;
+        this.msj = data.msj;
+        this.timestamp = data.timestamp || null;
     }
 }
 

@@ -1,5 +1,6 @@
-const ChatDto = require('../models/dtos/ChatDto');
 const { chatDao } = require('../models/daos');
+const ChatDto = require('../models/dtos/ChatDto');
+const Chat = require('../services/chat');
 
 class ChatRepo {
     async getAll() {
@@ -13,4 +14,4 @@ class ChatRepo {
     } 
 }
 
-module.exports = ChatRepo;
+module.exports = new ChatRepo();

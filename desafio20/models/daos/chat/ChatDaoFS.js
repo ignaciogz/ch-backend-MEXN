@@ -21,11 +21,11 @@ class ChatDaoFS extends FSContainer {
         try {
             const results = await super.getAll();
 
-            const finalResult = results.map(result => {
+            const dtos = results.map(result => {
                 return new ChatDto(result);
             });
 
-            return finalResult;
+            return dtos;
         } catch (error) {
             console.log("Error getAll() on CartsDaoFS", error);
         }

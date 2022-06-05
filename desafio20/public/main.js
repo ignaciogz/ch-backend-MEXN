@@ -33,7 +33,7 @@ function initSockets() {
     socket.on('init', data => {
         data = denormalizeMsjs(data, chatSchema);
         data.existenProductos = data.arrayProductos.length > 0;
-        data.existenMsjs = data.arrayMsjs.mensajes.entities.mensajes ? true : false;
+        data.existenMsjs = data.arrayMsjs.mensajes.length > 0;
 
         renderView(data);
 
@@ -44,7 +44,7 @@ function initSockets() {
     socket.on('renderView', data => {
         data = denormalizeMsjs(data, chatSchema);
         data.existenProductos = data.arrayProductos.length > 0;
-        data.existenMsjs = data.arrayMsjs.mensajes.entities.mensajes ? true : false;
+        data.existenMsjs = data.arrayMsjs.mensajes.length > 0;
         
         renderView(data);
     });
@@ -128,6 +128,7 @@ function initFormProduct() {
         }
 
         socket.emit("new-product", productoNuevo);
+        formProduct.reset();
 
         return false;
     })
@@ -161,31 +162,20 @@ function initFormChat() {
 
 function denormalizeMsjs(data, schema) {
     let compresion = null;
+    let arrayMsjs = normalizr.denormalize(data.arrayMsjs.result, schema, data.arrayMsjs.entities);
 
-    if(data.arrayMsjs.length > 0) {
-        let arrayMsjs = normalizr.denormalize(data.arrayMsjs.result, schema, data.arrayMsjs.entities);
-        console.log("DATA: ", data);
-        console.log("ARRAY desnormalizado: ", arrayMsjs)
-    
+    if(arrayMsjs.mensajes.length > 0) {
         let normalizado = JSON.stringify(data.arrayMsjs).length;
         let desnormalizado = JSON.stringify(arrayMsjs).length;
         compresion = Math.floor(100 - (normalizado * 100) / desnormalizado);
-
-        return {
-            ...data,
-            arrayMsjs,
-            compresion
-        }
     } else {
         compresion = 0;
-
-        return {
-            ...data,
-            arrayMsjs: {
-                mensajes: data.arrayMsjs
-            },
-            compresion
-        }
+    }
+    
+    return {
+        ...data,
+        arrayMsjs,
+        compresion
     }
 }
 

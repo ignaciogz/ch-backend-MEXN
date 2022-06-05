@@ -9,8 +9,8 @@
         "alias": "Alias",
         "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
       },
-      "msj": "Holaaaaa, Como todo?",
       "id": 1,
+      "msj": "Holaaaaa, Como todo?",
       "timestamp": "01-04-2022 00:44:42"
     },
     {
@@ -22,8 +22,8 @@
         "alias": "Otro Alias",
         "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
       },
-      "msj": "Holaaaaa, bien y vos??",
       "id": 2,
+      "msj": "Holaaaaa, bien y vos??",
       "timestamp": "01-04-2022 00:48:00"
     },
     {
@@ -35,8 +35,8 @@
         "alias": "Alias",
         "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
       },
-      "msj": "Todo bien, x suerte",
       "id": 3,
+      "msj": "Todo bien, x suerte",
       "timestamp": "01-04-2022 00:50:47"
     },
     {
@@ -48,8 +48,8 @@
         "alias": "Alias",
         "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
       },
-      "msj": "Hacelo algo el fin de semana?",
       "id": 4,
+      "msj": "Hacelo algo el fin de semana?",
       "timestamp": "01-04-2022 00:55:23"
     },
     {
@@ -61,8 +61,8 @@
         "alias": "PepitoH",
         "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
       },
-      "msj": "Siii, yo me sumo",
       "id": 5,
+      "msj": "Siii, yo me sumo",
       "timestamp": "01-04-2022 17:16:51"
     }
   ]

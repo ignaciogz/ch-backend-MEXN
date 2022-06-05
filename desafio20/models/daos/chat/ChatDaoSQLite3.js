@@ -17,7 +17,10 @@ class ChatDaoSQLite3 extends RelationalDBContainer {
         try {
             const result = await super.getByID(id);
             
-            return new ChatDto(result);
+            let dto = new ChatDto(result);
+            dto.autor = JSON.parse(dto.autor);
+            
+            return dto;
         } catch (error) {
             console.log("Error getById() on ChatDaoSQLite3", error);
         }
@@ -27,11 +30,14 @@ class ChatDaoSQLite3 extends RelationalDBContainer {
         try {
             const results = await super.getAll();
 
-            const finalResult = results.map(result => {
-                return new ChatDto(result);
+            const dtos = results.map(result => {
+                let dto = new ChatDto(result);
+                dto.autor = JSON.parse(dto.autor);
+                
+                return dto;
             });
 
-            return finalResult;
+            return dtos;
         } catch (error) {
             console.log("Error getAll() on ChatDaoSQLite3", error);
         }
