@@ -27,6 +27,7 @@ const fakerRouter = require('./routes/fakerRoutes');
 const forkRouter = require('./routes/forkRoutes');
 const generalRouter = require('./routes/generalRoutes');
 const processRouter = require('./routes/processRoutes');
+const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 
 // ↓ ****** SOCKETS ****** ↓
@@ -95,6 +96,7 @@ class Server {
 
     routes() {
         this.app.use('/', generalRouter);
+        this.app.use('/api/productos', productRouter);
         this.app.use('/api/usuario', userRouter);
         this.app.use('/auth/facebook', facebookRouter);
         this.app.use('/faker', fakerRouter);

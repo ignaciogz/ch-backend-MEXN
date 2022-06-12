@@ -5,14 +5,16 @@
   "scripts": {
     "autocannon": "autocannon -c 100 -d 20 http://localhost:8080/process/api/info",
     "artillery": "artillery quick --count 20 -n 50 http://localhost:8080/process/api/info",
-    "test": "node src/benchmark.js",
+    "test-manual": "node src/benchmark.js",
     "dev": "nodemon server.js -p 8080 -s FS",
     "prof": "node --prof server.js -p 8080",
     "inspect": "node --inspect server.js -p 8080",
     "process-con": "node --prof-process src/isolate-con-consolelog.log > src/result-con-consolelog.txt",
     "process-sin": "node --prof-process src/isolate-sin-consolelog.log > src/result-sin-consolelog.txt",
     "start": "node server.js -p 8080 -s FS",
-    "0x": "0x server.js -p 8080"
+    "0x": "0x server.js -p 8080",
+    "test": "mocha test/apirestful.test.js",
+    "client": "node http_client/"
   },
   "keywords": [],
   "author": "",
