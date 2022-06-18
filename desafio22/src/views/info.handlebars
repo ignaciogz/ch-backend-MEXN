@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="contenido">
+                <h3>Info obtenida del objeto process de Node.js</h3>
+
+                <ul class="list-group">
+                    {{#each info}}
+                        <li class="list-group-item"><strong>{{@key}}</strong> -> {{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
