@@ -37,6 +37,9 @@ const appSocket = require('./utils/sockets/appSocket');
 const cluster = require('cluster');
 const CPUS = require('os').cpus();
 
+// ↓ ****** GRAPH QL ****** ↓
+const graphqlServer = require('./utils/graphql');
+
 class Server {
     constructor() {
         this.app = express();
@@ -48,6 +51,7 @@ class Server {
         this.settings();
         this.middleware();
         this.routes();
+        this.graphql();
         this.sockets();
         this.middlewareError();
 
@@ -106,6 +110,10 @@ class Server {
 
     middlewareError() {
         this.app.use(serverMw.routeNotImplemented);
+    }
+
+    graphql() {
+        this.app.use('/graphql', graphqlServer);
     }
 
     sockets() {

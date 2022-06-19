@@ -8,7 +8,7 @@ const getProducts = async () => {
 
 const postProduct = async () => {
     const postData = await productAxios.postProduct({
-        title: "Producto agregador por http client",
+        title: "Producto agregado por http client",
         price: 999.88,
         thumbnail: "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
     });
@@ -17,9 +17,9 @@ const postProduct = async () => {
 
 const putProduct = async () => {
     const putData = await productAxios.putProduct({
-        id: 4,
+        id: 2,
         data: {
-            "title": "Producto agregador por http client",
+            "title": "Producto modificado por http client",
             "price": 111.22,
             "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
         }

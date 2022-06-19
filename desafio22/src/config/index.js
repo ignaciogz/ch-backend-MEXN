@@ -21,7 +21,8 @@ const config = {
     SELECTED_STORAGE: args.STORAGE,
     SESSION_SECRET: process.env.SESSION_SECRET || "NO SUPER SECRET",
     FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID || "",
-    FACEBOOK_SECRET_KEY: process.env.FACEBOOK_SECRET_KEY || ""
+    FACEBOOK_SECRET_KEY: process.env.FACEBOOK_SECRET_KEY || "",
+    USE_GRAPHIQL: process.env.USE_GRAPHIQL || false
 }
 
 const DB = {
