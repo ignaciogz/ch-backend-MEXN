@@ -1,11 +1,10 @@
-const express = require('express');
+const Router = require('koa-router');
 const authMw = require("../utils/middlewares/authMiddleware");
 
 const controller = require('../controllers/general');
 
-const generalRouter = express.Router();
+const generalRouter = new Router();
 
-generalRouter.all('*', controller.allLogearPeticionRecibida);
 generalRouter.get('/', authMw.isAuth, controller.getHomePage);
 generalRouter.get('/registro', authMw.isNotAuth, controller.getRegistroPage);
 generalRouter.get('/login', authMw.isNotAuth, controller.getLoginPage);

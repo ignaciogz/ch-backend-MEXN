@@ -1,8 +1,10 @@
-const express = require('express');
+const Router = require('koa-router');
 
 const controller = require('../controllers/product');
 
-const productRouter = express.Router();
+const productRouter = new Router({
+    prefix: "/api/productos"
+});
 
 productRouter.get('/', controller.getProducts);
 productRouter.post('/', controller.postProduct);

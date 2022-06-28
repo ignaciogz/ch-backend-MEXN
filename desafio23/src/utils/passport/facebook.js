@@ -1,5 +1,5 @@
 const { config } = require("../../config");
-const passportFacebook = require("passport");
+const passportFacebook = require('koa-passport');
 const facebookStrategy = require('passport-facebook').Strategy;
 
 // ↓ ****** INICIO - PASSPORT-FACEBOOK ****** ↓
@@ -23,8 +23,8 @@ passportFacebook.serializeUser(function (user, cb) {
     cb(null, user);
 });
 
-passportFacebook.deserializeUser(function (obj, cb) {
-    cb(null, obj);
+passportFacebook.deserializeUser(function (user, cb) {
+    cb(null, user);
 });
 // ↑ ****** FIN - PASSPORT-FACEBOOK ****** ↑
 

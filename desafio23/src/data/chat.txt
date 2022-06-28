@@ -1,3 +1,69 @@
 {
-  "elements": []
+  "elements": [
+    {
+      "autor": {
+        "id": "email@email.com",
+        "nombre": "Nacho",
+        "apellido": "Gz",
+        "edad": "01",
+        "alias": "Alias",
+        "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+      },
+      "id": 1,
+      "msj": "Holaaaaa, Como todo?",
+      "timestamp": "01-04-2022 00:44:42"
+    },
+    {
+      "autor": {
+        "id": "email@email2.com",
+        "nombre": "Nombre",
+        "apellido": "Apellido",
+        "edad": "50",
+        "alias": "Otro Alias",
+        "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+      },
+      "id": 2,
+      "msj": "Holaaaaa, bien y vos??",
+      "timestamp": "01-04-2022 00:48:00"
+    },
+    {
+      "autor": {
+        "id": "email@email.com",
+        "nombre": "Nacho",
+        "apellido": "Gz",
+        "edad": "01",
+        "alias": "Alias",
+        "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+      },
+      "id": 3,
+      "msj": "Todo bien, x suerte",
+      "timestamp": "01-04-2022 00:50:47"
+    },
+    {
+      "autor": {
+        "id": "email@email.com",
+        "nombre": "Nacho",
+        "apellido": "Gz",
+        "edad": "01",
+        "alias": "Alias",
+        "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+      },
+      "id": 4,
+      "msj": "Hacelo algo el fin de semana?",
+      "timestamp": "01-04-2022 00:55:23"
+    },
+    {
+      "autor": {
+        "id": "email@email3.com",
+        "nombre": "Pepito",
+        "apellido": "Huerfanito",
+        "edad": "35",
+        "alias": "PepitoH",
+        "avatar": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+      },
+      "id": 5,
+      "msj": "Siii, yo me sumo",
+      "timestamp": "01-04-2022 17:16:51"
+    }
+  ]
 }

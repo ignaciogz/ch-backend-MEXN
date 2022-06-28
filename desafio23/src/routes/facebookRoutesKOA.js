@@ -1,7 +1,9 @@
-const express = require('express');
+const Router = require('koa-router');
 const { passportFacebook } = require("../utils/passport/facebook");
 
-const facebookRouter = express.Router();
+const facebookRouter = new Router({
+    prefix: "/auth/facebook"
+});
 
 facebookRouter.get('/', passportFacebook.authenticate('facebook'));
 

@@ -1,19 +1,19 @@
 class Auth {
-    isAuth(req, res, next) {
-        const userIsAuthenticated = req.session.user ? true : false;
-        if(userIsAuthenticated || req.isAuthenticated()){
-            next();
+    async isAuth(ctx, next) {
+        const userIsAuthenticated = ctx.session.user ? true : false;
+        if(userIsAuthenticated || ctx.isAuthenticated()){
+            await next();
         } else {
-            res.redirect('/login');
+            ctx.redirect('/login');
         }
     }
     
-    isNotAuth(req, res, next) {
-        const userIsAuthenticated = req.session.user ? true : false;
-        if(!userIsAuthenticated && !req.isAuthenticated()){
-            next();
+    async isNotAuth(ctx, next) {
+        const userIsAuthenticated = ctx.session.user ? true : false;
+        if(!userIsAuthenticated && !ctx.isAuthenticated()){
+            await next();
         } else {
-            res.redirect('/');
+            ctx.redirect('/');
         }
     }
 }

@@ -1,57 +1,50 @@
+const send = require('koa-send');
 const path = require('path');
-const { infoLog: loggerWinston } = require("../utils/loggers/winston");
 
-const allLogearPeticionRecibida = (req, res, next) => {
-    loggerWinston.info(`Petición recibida -> ruta: '${req.path}' || método: '${req.method}'`);
-    next();
+const getHomePage = async (ctx) => {
+    await send(ctx, 'main.html', { root: path.resolve('src/public') });
+}
+
+const getRegistroPage = async (ctx) => {
+    await send(ctx, 'register.html', { root: path.resolve('src/public') });
 };
 
-const getHomePage = (req, res) => {
-    res.sendFile('main.html', { root: path.resolve('src/public') });
+const getLoginPage = async (ctx) => {
+    await send(ctx, 'login.html', { root: path.resolve('src/public') });
 };
 
-const getRegistroPage = (req, res) => {
-    res.sendFile('register.html', { root: path.resolve('src/public') });
+const postLogin = async (ctx) => {
+    ctx.session.user = ctx.request.body;
+
+    ctx.body = {
+        success: true
+    };
+}
+
+const getLogout = async (ctx) => {
+    await send(ctx, 'logout.html', { root: path.resolve('src/public') });
 };
 
-const getLoginPage = (req, res) => {
-    res.sendFile('login.html', { root: path.resolve('src/public') });
-};
-
-const postLogin = (req, res) => {
-    req.session.user = req.body;
-    res.json({ success: true });
-};
-
-const getLogout = (req, res) => {
-    res.sendFile('logout.html', { root: path.resolve('src/public') });
-};
-
-const deleteLogout = (req, res) => {
-    if(req.user) {
-        req.user = null;
+const deleteLogout = (ctx, next) => {
+    if(ctx.session.user) {
+        ctx.session = null;
     }
 
-    req.session.destroy( err => {
-        if(err) {
-            res.send({ status: "Logout ERROR", body: err });
-        } else {
-            res.send("Logout OK !");
-        }
-    });
-};
+    if(ctx.state.user) {
+        ctx.logout();
+    }
+}; 
 
 // Errores
-const getLogin_errorPage = (req, res) => {
-    res.sendFile('login-error.html', { root: path.resolve('src/public') });
+const getLogin_errorPage = async (ctx) => {
+    await send(ctx, 'login-error.html', { root: path.resolve('src/public') });
 };
 
-const getRegistro_errorPage = (req, res) => {
-    res.sendFile('registro-error.html', { root: path.resolve('src/public') });
+const getRegistro_errorPage = async (ctx) => {
+    await send(ctx, 'registro-error.html', { root: path.resolve('src/public') });
 };
 
 module.exports = {
-    allLogearPeticionRecibida,
     getHomePage,
     getRegistroPage,
     getLoginPage,

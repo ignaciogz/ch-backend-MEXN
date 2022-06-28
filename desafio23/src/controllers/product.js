@@ -1,39 +1,39 @@
 const service = require('../services/product');
 
-const getProducts = async (req, res) => {
+const getProducts = async (ctx) => {
     try {
         const response = await service.getAll();
-        res.json(response);
+        ctx.body = response;
     } catch (error) {
         console.log(error);
     }
 };
 
-const postProduct = async (req, res) => {
+const postProduct = async (ctx) => {
     try {
-        const product = req.body;
+        const product = ctx.request.body;
         await service.save(product);
-        res.json(product);
+        ctx.body = product;
     } catch (error) {
         console.log(error);
     }
 };
 
-const putProduct = async (req, res) => {
+const putProduct = async (ctx) => {
     try {
-        const product = req.body;
+        const product = ctx.request.body;
         await service.update(product.id, product.data);
-        res.json(product);
+        ctx.body = product;
     } catch (error) {
         console.log(error);
     }
 };
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = async (ctx) => {
     try {
-        const product = req.body;
+        const product = ctx.request.body;
         await service.deleteById(product.id);
-        res.json(product);
+        ctx.body = product;
     } catch (error) {
         console.log(error);
     }
