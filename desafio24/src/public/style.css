@@ -1,0 +1,40 @@
+.row {
+    margin-top: 15px;
+}
+
+.contenido {
+    background-color: gainsboro;
+    margin: 0 5px 0 5px;
+    padding: 15px;
+}
+
+.contenido h2 {
+    color: blue;
+    
+}
+
+.contenido h3 {
+    color: brown;
+}
+
+.contenido h2,
+.contenido h3 {
+    margin-bottom: 25px;
+}
+
+.contenido ul {
+    background-color: black;
+}
+
+.contenido form label {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.contenido form input {
+    margin-bottom: 10px;
+}
+
+.contenido form [type="submit"] {
+    margin-top: 20px;
+}

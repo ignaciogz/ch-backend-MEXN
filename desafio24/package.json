@@ -1,0 +1,14 @@
+{
+  "name": "desafio24",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "denon run --allow-net --allow-read --allow-env ./src/servest.ts",
+    "start": "deno run --allow-net --allow-read --allow-env ./src/servest.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
